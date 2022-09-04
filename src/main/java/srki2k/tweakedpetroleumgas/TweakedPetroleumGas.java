@@ -16,7 +16,6 @@ public class TweakedPetroleumGas {
     public static final String MODID = "tweakedpetroleumgas";
     public static final String VERSION = "@VERSION@";
 
-
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         ErrorLoggingUtil.getStartupInstance().validateScripts();

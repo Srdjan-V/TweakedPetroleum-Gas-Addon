@@ -24,23 +24,22 @@ public class TweakedGasReservoir {
 
         List<String> biomeBlacklistList = new ArrayList<>();
         List<String> biomeWhitelistList = new ArrayList<>();
-        List<String> errors = new ArrayList<>();
 
         ReservoirValidation.validateReservoir(name, minSize, maxSize, replenishRate, pumpSpeed, weight, powerTier,
-                dimBlacklist, dimWhitelist, biomeBlacklist, biomeWhitelist,
-                biomeBlacklistList, biomeWhitelistList, errors);
+                biomeBlacklist, biomeWhitelist,
+                biomeBlacklistList, biomeWhitelistList);
 
-        if (errors.isEmpty()) {
-            IReservoirType res = TweakedPumpjackHandler.addTweakedReservoir(name, gas.getName(), minSize, maxSize, replenishRate, pumpSpeed, weight, powerTier);
 
-            res.setReservoirContent(TweakedPumpjackHandler.ReservoirContent.GAS);
-            res.setDimensionBlacklist(dimBlacklist);
-            res.setDimensionWhitelist(dimWhitelist);
-            res.setBiomeBlacklist(biomeBlacklistList.toArray(new String[0]));
-            res.setBiomeWhitelist(biomeWhitelistList.toArray(new String[0]));
+        IReservoirType res = TweakedPumpjackHandler.addTweakedReservoir(name, gas.getName(), minSize, maxSize, replenishRate, pumpSpeed, weight, powerTier);
 
-            CraftTweakerAPI.logInfo("Added Gas Reservoir Type: " + name);
-        }
+        res.setReservoirContent(TweakedPumpjackHandler.ReservoirContent.GAS);
+        res.setDimensionBlacklist(dimBlacklist);
+        res.setDimensionWhitelist(dimWhitelist);
+        res.setBiomeBlacklist(biomeBlacklistList.toArray(new String[0]));
+        res.setBiomeWhitelist(biomeWhitelistList.toArray(new String[0]));
+
+        CraftTweakerAPI.logInfo("Added Gas Reservoir Type: " + name);
+
 
     }
 }

@@ -25,7 +25,7 @@ public class GasPumpjackCategory implements IRecipeCategory<GasPumpjackWrapper> 
 
     @Override
     public String getTitle() {
-        return "ss"+ Translator.translateToLocal("tile.immersivepetroleum.metal_multiblock.pumpjack.name");
+        return Translator.translateToLocal("gui.gas") + " " + Translator.translateToLocal("tile.immersivepetroleum.metal_multiblock.pumpjack.name");
     }
 
     @Override

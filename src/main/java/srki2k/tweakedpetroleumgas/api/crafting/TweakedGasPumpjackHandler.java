@@ -9,6 +9,14 @@ import static flaxbeard.immersivepetroleum.api.crafting.PumpjackHandler.getOilWo
 
 public class TweakedGasPumpjackHandler {
 
+    /**
+     * Gets the gas of a given chunk
+     *
+     * @param world      World whose chunk to drain
+     * @param chunkX     Chunk x
+     * @param chunkZ     Chunk z
+     * @return Returns Gas
+     * */
     public static Gas getGas(World world, int chunkX, int chunkZ) {
         if (world.isRemote) {
             return null;

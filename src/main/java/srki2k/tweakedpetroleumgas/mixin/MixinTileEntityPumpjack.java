@@ -14,15 +14,15 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import org.spongepowered.asm.mixin.*;
-import srki2k.tweakedpetroleum.api.ihelpers.IPumpjackAddons;
 import srki2k.tweakedpetroleumgas.api.crafting.TweakedGasPumpjackHandler;
+import srki2k.tweakedpetroleumgas.api.util.IGasPumpjackAddons;
 import srki2k.tweakedpetroleumgas.common.gaspumpjack.DummyMultiblockGasWrapper;
 
 import javax.annotation.Nullable;
 
 @SuppressWarnings("NullableProblems")
 @Mixin(value = TileEntityPumpjack.class, priority = 950)
-public abstract class MixinTileEntityPumpjack extends TileEntityMultiblockMetal<TileEntityPumpjack, IMultiblockRecipe> implements IPumpjackAddons {
+public abstract class MixinTileEntityPumpjack extends TileEntityMultiblockMetal<TileEntityPumpjack, IMultiblockRecipe> implements IGasPumpjackAddons {
 
     @Shadow
     public abstract void extractOil(int drained);
@@ -68,6 +68,7 @@ public abstract class MixinTileEntityPumpjack extends TileEntityMultiblockMetal<
 
 
     @Unique
+    @Override
     public Gas getGas() {
         return TweakedGasPumpjackHandler.getGas(
                 this.getWorld(), this.getPos().getX() >> 4, this.getPos().getZ() >> 4);
@@ -75,6 +76,7 @@ public abstract class MixinTileEntityPumpjack extends TileEntityMultiblockMetal<
     }
 
     @Unique
+    @Override
     public GasTank[] getAccessibleGasTanks(EnumFacing side) {
         TileEntityPumpjack master = this.master();
 
