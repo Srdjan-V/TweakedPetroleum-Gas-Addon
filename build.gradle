@@ -120,7 +120,12 @@ repositories {
 dependencies {
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
 
-    compileOnly  'srki2k:tweakedpetroleum:1.+'
+    if (project.local_env.toBoolean()) {
+        compileOnly  'srki2k:tweakedpetroleum:1.+'
+    } else {
+        implementation('curse.maven:TweakedPetroleum-653506:3968574')
+    }
+
 
     implementation 'CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.679'
     implementation fg.deobf('curse.maven:ImmersiveEngineering-231951:2974106')
