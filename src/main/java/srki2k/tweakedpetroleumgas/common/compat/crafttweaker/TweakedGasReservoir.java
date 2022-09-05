@@ -33,6 +33,31 @@ public class TweakedGasReservoir {
         IReservoirType res = TweakedPumpjackHandler.addTweakedReservoir(name, gas.getName(), minSize, maxSize, replenishRate, pumpSpeed, weight, powerTier);
 
         res.setReservoirContent(TweakedPumpjackHandler.ReservoirContent.GAS);
+        res.setDrainChance(1f);
+        res.setDimensionBlacklist(dimBlacklist);
+        res.setDimensionWhitelist(dimWhitelist);
+        res.setBiomeBlacklist(biomeBlacklistList.toArray(new String[0]));
+        res.setBiomeWhitelist(biomeWhitelistList.toArray(new String[0]));
+
+        CraftTweakerAPI.logInfo("Added Gas Reservoir Type: " + name);
+
+    }
+
+    public static void registerGasReservoirWithDrainChance(String name, IGasStack gas, int minSize, int maxSize, int replenishRate, int pumpSpeed, float drainChance, int weight, int powerTier,
+                                                       int[] dimBlacklist, int[] dimWhitelist, String[] biomeBlacklist, String[] biomeWhitelist) {
+
+        List<String> biomeBlacklistList = new ArrayList<>();
+        List<String> biomeWhitelistList = new ArrayList<>();
+
+        ReservoirValidation.validateReservoir(name, minSize, maxSize, replenishRate, pumpSpeed, weight, powerTier, drainChance,
+                biomeBlacklist, biomeWhitelist,
+                biomeBlacklistList, biomeWhitelistList);
+
+
+        IReservoirType res = TweakedPumpjackHandler.addTweakedReservoir(name, gas.getName(), minSize, maxSize, replenishRate, pumpSpeed, weight, powerTier);
+
+        res.setReservoirContent(TweakedPumpjackHandler.ReservoirContent.GAS);
+        res.setDrainChance(drainChance);
         res.setDimensionBlacklist(dimBlacklist);
         res.setDimensionWhitelist(dimWhitelist);
         res.setBiomeBlacklist(biomeBlacklistList.toArray(new String[0]));
@@ -42,4 +67,5 @@ public class TweakedGasReservoir {
 
 
     }
+
 }

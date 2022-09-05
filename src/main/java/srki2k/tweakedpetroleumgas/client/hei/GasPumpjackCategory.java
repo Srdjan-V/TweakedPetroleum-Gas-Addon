@@ -9,7 +9,6 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.util.Translator;
-import net.minecraft.client.Minecraft;
 import srki2k.tweakedpetroleum.api.crafting.TweakedPumpjackHandler;
 import srki2k.tweakedpetroleum.util.HEIUtil;
 import srki2k.tweakedpetroleumgas.TweakedPetroleumGas;
@@ -36,11 +35,6 @@ public class GasPumpjackCategory implements IRecipeCategory<GasPumpjackWrapper> 
     @Override
     public IDrawable getBackground() {
         return HEIUtil.getPumpjackBackground();
-    }
-
-    @Override
-    public void drawExtras(Minecraft minecraft) {
-        HEIUtil.getPumpjackWarning().draw(minecraft, 58, 8);
     }
 
     @Override
