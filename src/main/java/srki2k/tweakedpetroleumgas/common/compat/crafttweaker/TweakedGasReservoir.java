@@ -43,6 +43,7 @@ public class TweakedGasReservoir {
 
     }
 
+    @ZenMethod
     public static void registerGasReservoirWithDrainChance(String name, IGasStack gas, int minSize, int maxSize, int replenishRate, int pumpSpeed, float drainChance, int weight, int powerTier,
                                                        int[] dimBlacklist, int[] dimWhitelist, String[] biomeBlacklist, String[] biomeWhitelist) {
 

@@ -14,5 +14,5 @@ TweakedGasReservoir.registerGasReservoirWithDrainChance(String name, IGasStack g
     int[] dimBlacklist, int[] dimWhitelist, String[] biomeBlacklist, String[] biomeWhitelist)
 */
 
-    TweakedGasReservoir.registerReservoirWithDrainChance("oil123123", <liquid:oil>, 2500000, 15000000, 6, 25, 0.5, 40, 0,
+    TweakedGasReservoir.registerGasReservoirWithDrainChance("Osmium Slurry", <gas:osmium>, 2500000, 15000000, 6, 25, 0.5, 40, 0,
         [], [0], [], []);
