@@ -85,7 +85,6 @@ minecraft {
 }
 
 
-
 repositories {
     maven {
         url = 'https://maven.cleanroommc.com'
@@ -111,19 +110,17 @@ repositories {
         name = "Progwml6 maven"
         url = "https://dvs1.progwml6.com/files/maven/"
     }
-
-    flatDir {
-        dirs '../TweakedPetroleum/build/libs'
+    maven {
+        name = "jitpack"
+        url 'https://jitpack.io'
     }
 }
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
 
-    if (project.local_env.toBoolean()) {
-        compileOnly  'srki2k:tweakedpetroleum:1.+'
-    } else {
-        implementation('curse.maven:TweakedPetroleum-653506:3971318')
+    implementation ("com.github.Srdjan-V:TweakedPetroleum:v${tweaked_petroleum_version}") {
+        exclude group: 'curse.maven'
     }
 
 
@@ -217,11 +214,8 @@ jar.finalizedBy('reobfJar')
 import org.apache.tools.ant.filters.ReplaceTokens
 
 task filterTokens(type: Sync) {
-
-    inputs.property 'version', version
-
     from sourceSets.main.java
-    filter(ReplaceTokens, tokens: [VERSION: version.toString()])
+    filter(ReplaceTokens, tokens: [VERSION: version.toString(), TWEAKEDPETROLEUMVERSION: tweaked_petroleum_version.toString()])
     into "$buildDir/src/$sourceSets.main.name/$sourceSets.main.java.name"
 }
 
