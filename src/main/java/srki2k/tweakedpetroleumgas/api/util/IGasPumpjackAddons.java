@@ -10,4 +10,5 @@ public interface IGasPumpjackAddons extends IPumpjackAddons {
     Gas getGas();
 
     GasTank[] getAccessibleGasTanks(EnumFacing side);
+
 }

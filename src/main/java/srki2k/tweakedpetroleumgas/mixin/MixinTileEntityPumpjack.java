@@ -97,8 +97,8 @@ public abstract class MixinTileEntityPumpjack extends TileEntityMultiblockMetal<
     @Unique
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-        if (capability == Capabilities.GAS_HANDLER_CAPABILITY) {
-            return this.getAccessibleGasTanks(facing).length > 0;
+        if (capability == Capabilities.GAS_HANDLER_CAPABILITY && this.getAccessibleGasTanks(facing).length > 0) {
+            return true;
         }
 
         return super.hasCapability(capability, facing);

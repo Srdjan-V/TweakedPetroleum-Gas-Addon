@@ -214,6 +214,9 @@ jar.finalizedBy('reobfJar')
 import org.apache.tools.ant.filters.ReplaceTokens
 
 task filterTokens(type: Sync) {
+    inputs.property 'version', version
+    inputs.property 'tweaked_petroleum_version', tweaked_petroleum_version
+
     from sourceSets.main.java
     filter(ReplaceTokens, tokens: [VERSION: version.toString(), TWEAKEDPETROLEUMVERSION: tweaked_petroleum_version.toString()])
     into "$buildDir/src/$sourceSets.main.name/$sourceSets.main.java.name"

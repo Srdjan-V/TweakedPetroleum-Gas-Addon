@@ -9,26 +9,19 @@ import mekanism.client.jei.MekanismJEI;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
-import srki2k.tweakedpetroleum.api.crafting.TweakedPumpjackHandler;
-import srki2k.tweakedpetroleum.api.ihelpers.IReservoirType;
 import srki2k.tweakedpetroleum.util.HEIUtil;
 import srki2k.tweakedpetroleumgas.api.util.IGasReservoirType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("NullableProblems")
 public class GasPumpjackWrapper implements IRecipeWrapper {
-    private final IReservoirType reservoir;
+    private final IGasReservoirType reservoir;
     private final Gas reservoirGas;
 
     public GasPumpjackWrapper(PumpjackHandler.ReservoirType reservoir) {
-        this.reservoir = (IReservoirType) reservoir;
-        reservoirGas = ((IGasReservoirType) reservoir).getGas();
-    }
-
-    public TweakedPumpjackHandler.ReservoirContent getReservoirContent() {
-        return reservoir.getReservoirContent();
+        this.reservoir = (IGasReservoirType) reservoir;
+        reservoirGas = this.reservoir.getGas();
     }
 
     public GasStack getReplenishRateGas() {

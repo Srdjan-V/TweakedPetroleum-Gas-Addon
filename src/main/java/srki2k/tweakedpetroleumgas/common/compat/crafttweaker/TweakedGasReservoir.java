@@ -33,7 +33,6 @@ public class TweakedGasReservoir {
         IReservoirType res = TweakedPumpjackHandler.addTweakedReservoir(name, gas.getName(), minSize, maxSize, replenishRate, pumpSpeed, weight, powerTier);
 
         res.setReservoirContent(TweakedPumpjackHandler.ReservoirContent.GAS);
-        res.setDrainChance(1f);
         res.setDimensionBlacklist(dimBlacklist);
         res.setDimensionWhitelist(dimWhitelist);
         res.setBiomeBlacklist(biomeBlacklistList.toArray(new String[0]));

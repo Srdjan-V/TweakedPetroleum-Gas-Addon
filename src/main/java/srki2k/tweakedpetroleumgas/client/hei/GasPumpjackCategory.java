@@ -39,17 +39,16 @@ public class GasPumpjackCategory implements IRecipeCategory<GasPumpjackWrapper> 
 
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, GasPumpjackWrapper recipeWrapper, IIngredients ingredients) {
-        if (recipeWrapper.getReservoirContent() == TweakedPumpjackHandler.ReservoirContent.GAS) {
-            IGuiIngredientGroup<GasStack> gasStacks = recipeLayout.getIngredientsGroup(MekanismJEI.TYPE_GAS);
+        IGuiIngredientGroup<GasStack> gasStacks = recipeLayout.getIngredientsGroup(MekanismJEI.TYPE_GAS);
 
-            GasStackRenderer renderer1 = new GasStackRenderer(recipeWrapper.getMaxFluid(), false, 16, 47, null);
-            gasStacks.init(0, false, renderer1, 12, 10, 16, 47, 0, 0);
-            gasStacks.set(0, recipeWrapper.getAverageGas());
+        GasStackRenderer renderer1 = new GasStackRenderer(recipeWrapper.getMaxFluid(), false, 16, 47, null);
+        gasStacks.init(0, false, renderer1, 12, 10, 16, 47, 0, 0);
+        gasStacks.set(0, recipeWrapper.getAverageGas());
 
-            GasStackRenderer renderer2 = new GasStackRenderer(recipeWrapper.getPumpSpeed(), false, 16, 47, null);
-            gasStacks.init(1, false, renderer2, 36, 10, 16, 47, 0, 0);
-            gasStacks.set(1, recipeWrapper.getReplenishRateGas());
-        }
+        GasStackRenderer renderer2 = new GasStackRenderer(recipeWrapper.getPumpSpeed(), false, 16, 47, null);
+        gasStacks.init(1, false, renderer2, 36, 10, 16, 47, 0, 0);
+        gasStacks.set(1, recipeWrapper.getReplenishRateGas());
+
     }
 
 }

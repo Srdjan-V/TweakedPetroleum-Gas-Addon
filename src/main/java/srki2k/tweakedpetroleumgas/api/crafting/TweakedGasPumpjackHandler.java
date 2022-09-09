@@ -12,7 +12,7 @@ public class TweakedGasPumpjackHandler {
     /**
      * Gets the gas of a given chunk
      *
-     * @param world      World whose chunk to drain
+     * @param world      World whose chunk gas to get
      * @param chunkX     Chunk x
      * @param chunkZ     Chunk z
      * @return Returns Gas
