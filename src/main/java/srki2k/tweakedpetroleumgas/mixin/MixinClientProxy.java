@@ -12,7 +12,7 @@ import srki2k.tweakedpetroleum.api.ihelpers.IReservoirType;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 
-@Mixin(ClientProxy.class)
+@Mixin(value = ClientProxy.class, remap = false)
 public abstract class MixinClientProxy {
 
     @Redirect(method = "handleReservoirManual", at = @At(value = "FIELD", target = "Lflaxbeard/immersivepetroleum/api/crafting/PumpjackHandler;reservoirList:Ljava/util/LinkedHashMap;"))
@@ -23,7 +23,7 @@ public abstract class MixinClientProxy {
         int i = 0;
         while (keySet.hasNext()) {
             PumpjackHandler.ReservoirType reservoirType = keySet.next();
-            if (((IReservoirType)reservoirType).getReservoirContent() == TweakedPumpjackHandler.ReservoirContent.LIQUID) {
+            if (((IReservoirType) reservoirType).getReservoirContent() == TweakedPumpjackHandler.ReservoirContent.LIQUID) {
                 reservoirList.put(reservoirType, i);
                 i++;
             }

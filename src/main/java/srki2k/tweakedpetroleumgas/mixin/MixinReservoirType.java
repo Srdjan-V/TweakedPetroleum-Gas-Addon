@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import srki2k.tweakedpetroleumgas.api.util.IGasReservoirType;
 
-@Mixin(PumpjackHandler.ReservoirType.class)
+@Mixin(value = PumpjackHandler.ReservoirType.class, remap = false)
 public abstract class MixinReservoirType implements IGasReservoirType {
 
     @Shadow

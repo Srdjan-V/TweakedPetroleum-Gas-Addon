@@ -21,7 +21,7 @@ import srki2k.tweakedpetroleumgas.common.gaspumpjack.DummyMultiblockGasWrapper;
 import javax.annotation.Nullable;
 
 @SuppressWarnings("NullableProblems")
-@Mixin(value = TileEntityPumpjack.class, priority = 950)
+@Mixin(value = TileEntityPumpjack.class, remap = false, priority = 950)
 public abstract class MixinTileEntityPumpjack extends TileEntityMultiblockMetal<TileEntityPumpjack, IMultiblockRecipe> implements IGasPumpjackAddons {
 
     @Shadow
