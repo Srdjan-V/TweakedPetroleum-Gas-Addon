@@ -17,6 +17,15 @@ plugins {
     id 'wtf.gofancy.fancygradle' version '1.1.+'
 }
 
+configurations {
+    gitDependencies {
+        exclude group: 'curse.maven', module: 'AdvancedRocketry-236542'
+        exclude group: 'curse.maven', module: 'Libvulpes-236541'
+        exclude group: 'curse.maven', module: 'had-enough-items-557549'
+    }
+    implementation.extendsFrom(gitDependencies)
+}
+
 apply {
     plugin 'net.minecraftforge.gradle'
     plugin 'java'
@@ -110,19 +119,10 @@ repositories {
         name = "Progwml6 maven"
         url = "https://dvs1.progwml6.com/files/maven/"
     }
-    maven {
-        name = "jitpack"
-        url 'https://jitpack.io'
-    }
 }
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
-
-    implementation ("com.github.Srdjan-V:TweakedPetroleum:v${tweaked_petroleum_version}") {
-        exclude group: 'curse.maven'
-    }
-
 
     implementation 'CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.679'
     implementation fg.deobf('curse.maven:ImmersiveEngineering-231951:2974106')
@@ -133,8 +133,8 @@ dependencies {
     implementation('curse.maven:Mekanism-268560:2835175')
 
     //HEI/JEI
-    //compileOnly fg.deobf('mezz.jei:jei_1.12.2:4.16.1.302:api')
-    implementation fg.deobf('mezz.jei:jei_1.12.2:4.16.1.302')
+    compileOnly fg.deobf('mezz.jei:jei_1.12.2:4.16.1.302:api')
+    runtimeOnly fg.deobf('mezz.jei:jei_1.12.2:4.16.1.302')
     //implementation fg.deobf('curse.maven:had-enough-items-557549:3862733')
 
 
@@ -160,6 +160,21 @@ dependencies {
     }
 }
 
+git {
+    def props = new Properties()
+    new File("${project.projectDir}/gradle.properties").withInputStream { props.load(it) }
+
+    gitDependencies 'https://github.com/Srdjan-V/TweakedLib.git', {
+        name 'TweakedLib'
+        commit "v${props.getProperty('tweaked_lib_version')}"
+    }
+
+    gitDependencies 'https://github.com/Srdjan-V/TweakedPetroleum.git', {
+        name 'TweakedPetroleum'
+        commit "v${props.getProperty('tweaked_petroleum_version')}"
+    }
+
+}
 
 sourceSets {
     main {
@@ -223,6 +238,10 @@ task filterTokens(type: Sync) {
 }
 
 compileJava.source = filterTokens.outputs
+
+/*compileJava {
+    classpath = sourceSets.main.compileClasspath + configurations.gitDependencies
+}*/
 
 processResources {
     // required to allow file expansion later

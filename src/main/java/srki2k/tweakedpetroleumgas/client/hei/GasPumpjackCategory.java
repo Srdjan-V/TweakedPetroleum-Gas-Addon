@@ -8,14 +8,12 @@ import mezz.jei.api.gui.IGuiIngredientGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
-import mezz.jei.util.Translator;
-import srki2k.tweakedpetroleum.api.crafting.TweakedPumpjackHandler;
-import srki2k.tweakedpetroleum.util.HEIUtil;
+import srki2k.tweakedlib.api.hei.BaseHEIUtil;
 import srki2k.tweakedpetroleumgas.TweakedPetroleumGas;
 
 @SuppressWarnings("NullableProblems")
 public class GasPumpjackCategory implements IRecipeCategory<GasPumpjackWrapper> {
-    public static final String UID = "tweakedpetrolioumgas.pumpjack";
+    public static final String UID = TweakedPetroleumGas.MODID + ".pumpjack";
 
     @Override
     public String getUid() {
@@ -24,7 +22,7 @@ public class GasPumpjackCategory implements IRecipeCategory<GasPumpjackWrapper> 
 
     @Override
     public String getTitle() {
-        return Translator.translateToLocal("gui.gas") + " " + Translator.translateToLocal("tile.immersivepetroleum.metal_multiblock.pumpjack.name");
+        return BaseHEIUtil.translateToLocal("gui.gas") + " " + BaseHEIUtil.translateToLocal("tile.immersivepetroleum.metal_multiblock.pumpjack.name");
     }
 
     @Override
@@ -34,19 +32,20 @@ public class GasPumpjackCategory implements IRecipeCategory<GasPumpjackWrapper> 
 
     @Override
     public IDrawable getBackground() {
-        return HEIUtil.getPumpjackBackground();
+        return BaseHEIUtil.getPumpjackBackground();
     }
 
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, GasPumpjackWrapper recipeWrapper, IIngredients ingredients) {
         IGuiIngredientGroup<GasStack> gasStacks = recipeLayout.getIngredientsGroup(MekanismJEI.TYPE_GAS);
+        gasStacks.addTooltipCallback(recipeWrapper);
 
-        GasStackRenderer renderer1 = new GasStackRenderer(recipeWrapper.getMaxFluid(), false, 16, 47, null);
-        gasStacks.init(0, false, renderer1, 12, 10, 16, 47, 0, 0);
+        GasStackRenderer renderer1 = new GasStackRenderer(recipeWrapper.getMaxFluid(), false, 16, 60, null);
+        gasStacks.init(0, false, renderer1, 12, 10, 16, 60, 0, 0);
         gasStacks.set(0, recipeWrapper.getAverageGas());
 
-        GasStackRenderer renderer2 = new GasStackRenderer(recipeWrapper.getPumpSpeed(), false, 16, 47, null);
-        gasStacks.init(1, false, renderer2, 36, 10, 16, 47, 0, 0);
+        GasStackRenderer renderer2 = new GasStackRenderer(recipeWrapper.getPumpSpeed(), false, 16, 60, null);
+        gasStacks.init(1, false, renderer2, 36, 10, 16, 60, 0, 0);
         gasStacks.set(1, recipeWrapper.getReplenishRateGas());
 
     }

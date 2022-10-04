@@ -7,6 +7,8 @@ import mekanism.api.gas.IGasHandler;
 import net.minecraft.util.EnumFacing;
 
 public class DummyMultiblockGasWrapper implements IGasHandler {
+    public static IGasHandler INSTANCE = new DummyMultiblockGasWrapper();
+
     @Override
     public int receiveGas(EnumFacing side, GasStack resource, boolean doTransfer) {
         return 0;

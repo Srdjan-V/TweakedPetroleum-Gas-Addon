@@ -6,16 +6,18 @@ import flaxbeard.immersivepetroleum.common.Config;
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasStack;
 import mekanism.client.jei.MekanismJEI;
+import mezz.jei.api.gui.ITooltipCallback;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
-import srki2k.tweakedpetroleum.util.HEIUtil;
+import srki2k.tweakedlib.api.hei.BaseHEIUtil;
+import srki2k.tweakedpetroleum.util.HEIPumpjackUtil;
 import srki2k.tweakedpetroleumgas.api.util.IGasReservoirType;
 
 import java.util.List;
 
 @SuppressWarnings("NullableProblems")
-public class GasPumpjackWrapper implements IRecipeWrapper {
+public class GasPumpjackWrapper implements IRecipeWrapper, ITooltipCallback<GasStack> {
     private final IGasReservoirType reservoir;
     private final Gas reservoirGas;
 
@@ -50,18 +52,18 @@ public class GasPumpjackWrapper implements IRecipeWrapper {
         String[][] strings = new String[3][];
 
         if (reservoir.getDrainChance() != 1f) {
-            strings[0] = new String[]{"jei.pumpjack.reservoir.draw_chance",
+            strings[0] = new String[]{"tweakedpetroleum.jei.reservoir.draw_chance",
                     String.valueOf(reservoir.getDrainChance() * 100),
                     String.valueOf(100f - (reservoir.getDrainChance() * 100))};
         }
 
         if (Config.IPConfig.Extraction.req_pipes) {
-            strings[2] = new String[]{"jei.pumpjack.reservoir.req_pipes"};
+            strings[2] = new String[]{"tweakedpetroleum.jei.reservoir.req_pipes"};
         }
 
-        strings[1] = new String[]{"jei.pumpjack.reservoir.gas_info"};
+        strings[1] = new String[]{"tweakedpetroleumgas.jei.reservoir.gas_info"};
 
-        return HEIUtil.tooltipStrings(mouseX, mouseY, strings, reservoir);
+        return HEIPumpjackUtil.tooltipStrings(mouseX, mouseY, strings, reservoir);
     }
 
     @Override
@@ -76,8 +78,13 @@ public class GasPumpjackWrapper implements IRecipeWrapper {
             warningCount++;
         }
 
-        HEIUtil.getPumpjackWarning().draw(minecraft, 58, 8);
-        minecraft.fontRenderer.drawString(String.valueOf(warningCount), 58, 8, 16696077);
+        BaseHEIUtil.getPumpjackWarning().draw(minecraft, 55, 8);
+        minecraft.fontRenderer.drawString(String.valueOf(warningCount), 55, 6, 16696077);
+    }
+
+    @Override
+    public void onTooltip(int slotIndex, boolean input, GasStack ingredient, List<String> tooltip) {
+        HEIPumpjackUtil.onTooltip(slotIndex, reservoir, ingredient.amount, ingredient.getGas().getLocalizedName(), tooltip);
     }
 
 }

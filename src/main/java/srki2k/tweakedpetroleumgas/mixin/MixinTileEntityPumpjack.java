@@ -109,7 +109,7 @@ public abstract class MixinTileEntityPumpjack extends TileEntityMultiblockMetal<
     @SuppressWarnings("unchecked")
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
         if (capability == Capabilities.GAS_HANDLER_CAPABILITY && this.getAccessibleGasTanks(facing).length > 0) {
-            return (T) new DummyMultiblockGasWrapper();
+            return (T) DummyMultiblockGasWrapper.INSTANCE;
         }
 
         return super.getCapability(capability, facing);
