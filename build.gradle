@@ -119,10 +119,18 @@ repositories {
         name = "Progwml6 maven"
         url = "https://dvs1.progwml6.com/files/maven/"
     }
+    new File("./GitJars/libs").list().collect().forEach { s ->
+        flatDir {
+            dirs "./GitJars/libs/${s}/build/libs"
+        }
+    }
 }
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
+
+    implementation "srki2k:TweakedLib:${project.tweaked_lib_version}"
+    implementation "srki2k:TweakedPetroleum:${project.tweaked_petroleum_version}"
 
     implementation 'CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.679'
     implementation fg.deobf('curse.maven:ImmersiveEngineering-231951:2974106')
@@ -160,7 +168,7 @@ dependencies {
     }
 }
 
-git {
+/*git {
     def props = new Properties()
     new File("${project.projectDir}/gradle.properties").withInputStream { props.load(it) }
 
@@ -174,7 +182,7 @@ git {
         commit "v${props.getProperty('tweaked_petroleum_version')}"
     }
 
-}
+}*/
 
 sourceSets {
     main {
