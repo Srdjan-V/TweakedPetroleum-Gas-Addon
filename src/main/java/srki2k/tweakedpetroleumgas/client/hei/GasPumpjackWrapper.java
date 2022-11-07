@@ -10,8 +10,7 @@ import mezz.jei.api.gui.ITooltipCallback;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
-import srki2k.tweakedlib.api.hei.BaseHEIUtil;
-import srki2k.tweakedpetroleum.util.HEIPumpjackUtil;
+import srki2k.tweakedpetroleum.util.hei.HEIPumpjackUtil;
 import srki2k.tweakedpetroleumgas.api.util.IGasReservoirType;
 
 import java.util.List;
@@ -78,7 +77,7 @@ public class GasPumpjackWrapper implements IRecipeWrapper, ITooltipCallback<GasS
             warningCount++;
         }
 
-        BaseHEIUtil.getPumpjackWarning().draw(minecraft, 55, 8);
+        HEIPumpjackUtil.getPumpjackWarning().draw(minecraft, 55, 8);
         minecraft.fontRenderer.drawString(String.valueOf(warningCount), 55, 6, 16696077);
     }
 

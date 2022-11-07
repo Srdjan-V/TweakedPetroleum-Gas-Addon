@@ -17,15 +17,6 @@ plugins {
     id 'wtf.gofancy.fancygradle' version '1.1.+'
 }
 
-configurations {
-    gitDependencies {
-        exclude group: 'curse.maven', module: 'AdvancedRocketry-236542'
-        exclude group: 'curse.maven', module: 'Libvulpes-236541'
-        exclude group: 'curse.maven', module: 'had-enough-items-557549'
-    }
-    implementation.extendsFrom(gitDependencies)
-}
-
 apply {
     plugin 'net.minecraftforge.gradle'
     plugin 'java'
@@ -63,7 +54,7 @@ minecraft {
     }
     runs {
         client {
-            workingDirectory project.file('run/client')
+            workingDirectory project.file('run')
             if (project.use_coremod.toBoolean()) {
                 jvmArg '-Dfml.coreMods.load=' + coremod_plugin_class_name
             }
@@ -78,7 +69,7 @@ minecraft {
         }
 
         server {
-            workingDirectory project.file('run/server')
+            workingDirectory project.file('run')
             if (project.use_coremod.toBoolean()) {
                 jvmArg '-Dfml.coreMods.load=' + coremod_plugin_class_name
             }
@@ -119,18 +110,16 @@ repositories {
         name = "Progwml6 maven"
         url = "https://dvs1.progwml6.com/files/maven/"
     }
-    new File("./GitJars/libs").list().collect().forEach { s ->
-        flatDir {
-            dirs "./GitJars/libs/${s}/build/libs"
-        }
-    }
+    mavenLocal()
 }
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
 
-    implementation "srki2k:TweakedLib:${project.tweaked_lib_version}"
-    implementation "srki2k:TweakedPetroleum:${project.tweaked_petroleum_version}"
+    //Maven local
+    implementation("srki2k:TweakedLib:${project.tweaked_lib_version}") { transitive = false }
+    implementation("srki2k:TweakedPetroleum:${project.tweaked_petroleum_version}") { transitive = false }
+    implementation("com.cleanroommc:GroovyScriptFg5:${project.groovy_script_version}") { transitive = false }
 
     implementation 'CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.679'
     implementation fg.deobf('curse.maven:ImmersiveEngineering-231951:2974106')
@@ -167,22 +156,6 @@ dependencies {
         runtimeOnly 'zone.rong:mixinbooter:5.0'
     }
 }
-
-/*git {
-    def props = new Properties()
-    new File("${project.projectDir}/gradle.properties").withInputStream { props.load(it) }
-
-    gitDependencies 'https://github.com/Srdjan-V/TweakedLib.git', {
-        name 'TweakedLib'
-        commit "v${props.getProperty('tweaked_lib_version')}"
-    }
-
-    gitDependencies 'https://github.com/Srdjan-V/TweakedPetroleum.git', {
-        name 'TweakedPetroleum'
-        commit "v${props.getProperty('tweaked_petroleum_version')}"
-    }
-
-}*/
 
 sourceSets {
     main {
@@ -247,10 +220,6 @@ task filterTokens(type: Sync) {
 
 compileJava.source = filterTokens.outputs
 
-/*compileJava {
-    classpath = sourceSets.main.compileClasspath + configurations.gitDependencies
-}*/
-
 processResources {
     // required to allow file expansion later
     duplicatesStrategy = 'include'
@@ -311,5 +280,19 @@ artifacts {
     if (project.build_sourceJar.toBoolean()) {
         archives sourcesJar
     }
+}
+
+task setGitTag() {
+    def tagName = "v${project.version}"
+    def currentTags = ("git describe --tags --abbrev=0").execute().inputStream.readLines().get(0)
+
+    if (tagName == currentTags) {
+        project.logger.lifecycle('Current project version is the same as the latest tag')
+        return
+    }
+
+    project.logger.lifecycle('Pushing tag{}', tagName)
+    ("git tag $tagName").execute()
+    ("git push --tags").execute()
 }
 

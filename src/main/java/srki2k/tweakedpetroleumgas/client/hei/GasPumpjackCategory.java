@@ -8,7 +8,7 @@ import mezz.jei.api.gui.IGuiIngredientGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
-import srki2k.tweakedlib.api.hei.BaseHEIUtil;
+import srki2k.tweakedpetroleum.util.hei.HEIPumpjackUtil;
 import srki2k.tweakedpetroleumgas.TweakedPetroleumGas;
 
 @SuppressWarnings("NullableProblems")
@@ -22,7 +22,7 @@ public class GasPumpjackCategory implements IRecipeCategory<GasPumpjackWrapper> 
 
     @Override
     public String getTitle() {
-        return BaseHEIUtil.translateToLocal("gui.gas") + " " + BaseHEIUtil.translateToLocal("tile.immersivepetroleum.metal_multiblock.pumpjack.name");
+        return HEIPumpjackUtil.translateToLocal("gui.gas") + " " + HEIPumpjackUtil.translateToLocal("tile.immersivepetroleum.metal_multiblock.pumpjack.name");
     }
 
     @Override
@@ -32,7 +32,7 @@ public class GasPumpjackCategory implements IRecipeCategory<GasPumpjackWrapper> 
 
     @Override
     public IDrawable getBackground() {
-        return BaseHEIUtil.getPumpjackBackground();
+        return HEIPumpjackUtil.getPumpjackBackground();
     }
 
     @Override

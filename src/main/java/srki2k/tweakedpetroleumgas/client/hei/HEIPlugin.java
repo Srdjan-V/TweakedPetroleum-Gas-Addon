@@ -4,9 +4,9 @@ import flaxbeard.immersivepetroleum.api.crafting.PumpjackHandler;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
-import srki2k.tweakedlib.api.hei.BaseHEIUtil;
 import srki2k.tweakedpetroleum.api.crafting.TweakedPumpjackHandler;
 import srki2k.tweakedpetroleum.api.ihelpers.IReservoirType;
+import srki2k.tweakedpetroleum.util.hei.HEIPumpjackUtil;
 
 import java.util.stream.Collectors;
 
@@ -23,9 +23,9 @@ public class HEIPlugin implements IModPlugin {
     public void register(IModRegistry registry) {
         registry.handleRecipes(PumpjackHandler.ReservoirType.class, GasPumpjackWrapper::new, GasPumpjackCategory.UID);
         registry.addRecipes(PumpjackHandler.reservoirList.keySet().stream().
-                filter(reservoirType -> ((IReservoirType)reservoirType).getReservoirContent() == TweakedPumpjackHandler.ReservoirContent.GAS).
+                filter(reservoirType -> ((IReservoirType) reservoirType).getReservoirContent() == TweakedPumpjackHandler.ReservoirContent.GAS).
                 collect(Collectors.toList()), GasPumpjackCategory.UID);
-        registry.addRecipeCatalyst(BaseHEIUtil.getPumpjackCatalyst(), GasPumpjackCategory.UID);
+        registry.addRecipeCatalyst(HEIPumpjackUtil.getPumpjackCatalyst(), GasPumpjackCategory.UID);
     }
 
 }

@@ -6,7 +6,7 @@ import crafttweaker.annotations.ZenRegister;
 import mekanism.common.integration.crafttweaker.gas.IGasStack;
 import srki2k.tweakedpetroleum.api.crafting.TweakedPumpjackHandler;
 import srki2k.tweakedpetroleum.api.ihelpers.IReservoirType;
-import srki2k.tweakedpetroleum.util.ReservoirValidation;
+import srki2k.tweakedpetroleum.util.crafttweaker.ReservoirValidation;
 import stanhebben.zenscript.annotations.Optional;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
