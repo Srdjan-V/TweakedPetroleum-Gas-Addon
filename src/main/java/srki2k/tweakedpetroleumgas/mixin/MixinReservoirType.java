@@ -15,20 +15,26 @@ public abstract class MixinReservoirType implements IGasReservoirType {
     public String fluid;
 
     @Unique
-    Gas gas;
+    private Gas gas;
 
+    @Unique
     @Override
     public Gas getGas() {
-
-        if (this.fluid == null) {
+        if (fluid == null) {
             return null;
         }
 
-        if (this.gas == null) {
-            this.gas = GasRegistry.getGas(fluid);
+        if (gas == null) {
+            gas = GasRegistry.getGas(fluid);
         }
-
-        return this.gas;
-
+        return gas;
     }
+
+    @Unique
+    @Override
+    public void setGas(Gas gas) {
+        fluid = gas.getName();
+        this.gas = gas;
+    }
+
 }

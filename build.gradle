@@ -117,7 +117,7 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
 
     //Maven local
-    implementation("srki2k:TweakedLib:${project.tweaked_lib_version}") { transitive = false }
+    implementation("srki2k:TweakedLib:${project.tweaked_lib_version}")
     implementation("srki2k:TweakedPetroleum:${project.tweaked_petroleum_version}") { transitive = false }
     implementation("com.cleanroommc:GroovyScriptFg5:${project.groovy_script_version}") { transitive = false }
 
