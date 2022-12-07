@@ -28,6 +28,7 @@ configurations {
 
 apply {
     plugin 'net.minecraftforge.gradle'
+    plugin 'org.spongepowered.mixin'
     plugin 'java'
     plugin 'idea'
 }
@@ -157,6 +158,7 @@ dependencies {
     if (project.use_mixins.toBoolean()) {
         compileOnly 'zone.rong:mixinbooter:5.0'
         runtimeOnly 'zone.rong:mixinbooter:5.0'
+        annotationProcessor "org.spongepowered:mixin:0.8.2:processor"
     }
 }
 

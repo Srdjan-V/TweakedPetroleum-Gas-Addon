@@ -3,11 +3,11 @@
   "package": "srki2k.tweakedpetroleumgas.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "MixinEventHandler",
     "MixinReservoirType",
     "MixinTileEntityPumpjack"
   ],
   "client": [
+    "MixinEventHandler",
     "MixinClientProxy"
   ],
   "server": []
