@@ -1,8 +1,9 @@
-package srki2k.tweakedpetroleumgas.client.hei;
+package io.github.srdjanv.tweakedpetroleumgas.client.hei;
 
 import com.google.common.collect.Lists;
 import flaxbeard.immersivepetroleum.api.crafting.PumpjackHandler;
 import flaxbeard.immersivepetroleum.common.Config;
+import io.github.srdjanv.tweakedpetroleumgas.api.util.IGasReservoirType;
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasStack;
 import mekanism.client.jei.MekanismJEI;
@@ -10,9 +11,8 @@ import mezz.jei.api.gui.ITooltipCallback;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
-import srki2k.tweakedlib.api.hei.BaseHEIUtil;
-import srki2k.tweakedpetroleum.util.HEIPumpjackUtil;
-import srki2k.tweakedpetroleumgas.api.util.IGasReservoirType;
+import io.github.srdjanv.tweakedlib.api.hei.BaseHEIUtil;
+import io.github.srdjanv.tweakedpetroleum.util.HEIPumpjackUtil;
 
 import java.util.List;
 
@@ -39,7 +39,15 @@ public class GasPumpjackWrapper implements IRecipeWrapper, ITooltipCallback<GasS
     }
 
     public GasStack getAverageGas() {
-        return new GasStack(reservoirGas, (int) (((long) reservoir.getMaxSize() + (long) reservoir.getMinSize()) / 2));
+        return new GasStack(reservoirGas, getAverage());
+    }
+
+    public int getAverage() {
+        return (int) (((long) reservoir.getMaxSize() + (long) reservoir.getMinSize()) / 2);
+    }
+
+    private int getStringWidth() {
+        return Math.min(77, Minecraft.getMinecraft().fontRenderer.getStringWidth(reservoir.getName()) + 6);
     }
 
     @Override
@@ -63,7 +71,8 @@ public class GasPumpjackWrapper implements IRecipeWrapper, ITooltipCallback<GasS
 
         strings[1] = new String[]{"tweakedpetroleumgas.jei.reservoir.gas_info"};
 
-        return HEIPumpjackUtil.tooltipStrings(mouseX, mouseY, strings, reservoir);
+        return HEIPumpjackUtil.tooltipStrings(mouseX, mouseY, strings, reservoir,
+                this::getAverage, this::getStringWidth);
     }
 
     @Override

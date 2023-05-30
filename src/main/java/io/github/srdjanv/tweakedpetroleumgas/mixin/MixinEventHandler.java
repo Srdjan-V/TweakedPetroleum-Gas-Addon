@@ -1,4 +1,4 @@
-package srki2k.tweakedpetroleumgas.mixin;
+package io.github.srdjanv.tweakedpetroleumgas.mixin;
 
 import blusunrize.immersiveengineering.client.ClientProxy;
 import blusunrize.immersiveengineering.client.ClientUtils;
@@ -28,8 +28,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import srki2k.tweakedpetroleum.api.crafting.TweakedPumpjackHandler;
-import srki2k.tweakedpetroleum.api.ihelpers.IReservoirType;
+import io.github.srdjanv.tweakedpetroleum.api.crafting.TweakedPumpjackHandler;
+import io.github.srdjanv.tweakedpetroleum.api.ihelpers.IReservoirType;
 
 import java.text.DecimalFormat;
 import java.util.List;

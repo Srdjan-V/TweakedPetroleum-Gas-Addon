@@ -1,4 +1,4 @@
-package srki2k.tweakedpetroleumgas.mixin;
+package io.github.srdjanv.tweakedpetroleumgas.mixin;
 
 
 import flaxbeard.immersivepetroleum.api.crafting.PumpjackHandler;
@@ -6,8 +6,8 @@ import flaxbeard.immersivepetroleum.client.ClientProxy;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import srki2k.tweakedpetroleum.api.crafting.TweakedPumpjackHandler;
-import srki2k.tweakedpetroleum.api.ihelpers.IReservoirType;
+import io.github.srdjanv.tweakedpetroleum.api.crafting.TweakedPumpjackHandler;
+import io.github.srdjanv.tweakedpetroleum.api.ihelpers.IReservoirType;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;

@@ -1,12 +1,12 @@
-package srki2k.tweakedpetroleumgas.mixin;
+package io.github.srdjanv.tweakedpetroleumgas.mixin;
 
 import flaxbeard.immersivepetroleum.api.crafting.PumpjackHandler;
+import io.github.srdjanv.tweakedpetroleumgas.api.util.IGasReservoirType;
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasRegistry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
-import srki2k.tweakedpetroleumgas.api.util.IGasReservoirType;
 
 @Mixin(value = PumpjackHandler.ReservoirType.class, remap = false)
 public abstract class MixinReservoirType implements IGasReservoirType {

@@ -1,9 +1,9 @@
-package srki2k.tweakedpetroleumgas.api.util;
+package io.github.srdjanv.tweakedpetroleumgas.api.util;
 
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasTank;
 import net.minecraft.util.EnumFacing;
-import srki2k.tweakedpetroleum.api.ihelpers.IPumpjackAddons;
+import io.github.srdjanv.tweakedpetroleum.api.ihelpers.IPumpjackAddons;
 
 public interface IGasPumpjackAddons extends IPumpjackAddons {
 

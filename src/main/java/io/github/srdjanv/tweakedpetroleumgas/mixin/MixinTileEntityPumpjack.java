@@ -1,9 +1,10 @@
-package srki2k.tweakedpetroleumgas.mixin;
+package io.github.srdjanv.tweakedpetroleumgas.mixin;
 
 import blusunrize.immersiveengineering.api.MultiblockHandler;
 import blusunrize.immersiveengineering.api.crafting.IMultiblockRecipe;
 import blusunrize.immersiveengineering.common.blocks.metal.TileEntityMultiblockMetal;
 import flaxbeard.immersivepetroleum.common.blocks.metal.TileEntityPumpjack;
+import io.github.srdjanv.tweakedpetroleumgas.api.util.IGasPumpjackAddons;
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasStack;
 import mekanism.api.gas.GasTank;
@@ -14,9 +15,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import org.spongepowered.asm.mixin.*;
-import srki2k.tweakedpetroleumgas.api.crafting.TweakedGasPumpjackHandler;
-import srki2k.tweakedpetroleumgas.api.util.IGasPumpjackAddons;
-import srki2k.tweakedpetroleumgas.common.gaspumpjack.DummyMultiblockGasWrapper;
+import io.github.srdjanv.tweakedpetroleumgas.api.crafting.TweakedGasPumpjackHandler;
+import io.github.srdjanv.tweakedpetroleumgas.common.gaspumpjack.DummyMultiblockGasWrapper;
 
 import javax.annotation.Nullable;
 

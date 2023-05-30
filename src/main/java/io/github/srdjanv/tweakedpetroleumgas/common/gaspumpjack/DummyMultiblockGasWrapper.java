@@ -1,4 +1,4 @@
-package srki2k.tweakedpetroleumgas.common.gaspumpjack;
+package io.github.srdjanv.tweakedpetroleumgas.common.gaspumpjack;
 
 
 import mekanism.api.gas.Gas;

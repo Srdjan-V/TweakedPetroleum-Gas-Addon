@@ -1,4 +1,4 @@
-package srki2k.tweakedpetroleumgas.core;
+package io.github.srdjanv.tweakedpetroleumgas.core;
 
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import zone.rong.mixinbooter.ILateMixinLoader;

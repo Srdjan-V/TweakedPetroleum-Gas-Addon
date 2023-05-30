@@ -1,5 +1,6 @@
-package srki2k.tweakedpetroleumgas.client.hei;
+package io.github.srdjanv.tweakedpetroleumgas.client.hei;
 
+import io.github.srdjanv.tweakedpetroleumgas.TweakedPetroleumGas;
 import mekanism.api.gas.GasStack;
 import mekanism.client.jei.MekanismJEI;
 import mekanism.client.jei.gas.GasStackRenderer;
@@ -8,8 +9,7 @@ import mezz.jei.api.gui.IGuiIngredientGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
-import srki2k.tweakedlib.api.hei.BaseHEIUtil;
-import srki2k.tweakedpetroleumgas.TweakedPetroleumGas;
+import io.github.srdjanv.tweakedlib.api.hei.BaseHEIUtil;
 
 @SuppressWarnings("NullableProblems")
 public class GasPumpjackCategory implements IRecipeCategory<GasPumpjackWrapper> {
