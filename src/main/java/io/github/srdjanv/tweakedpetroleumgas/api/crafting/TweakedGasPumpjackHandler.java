@@ -1,7 +1,7 @@
 package io.github.srdjanv.tweakedpetroleumgas.api.crafting;
 
 import flaxbeard.immersivepetroleum.api.crafting.PumpjackHandler;
-import io.github.srdjanv.tweakedpetroleumgas.api.util.IGasReservoirType;
+import io.github.srdjanv.tweakedpetroleumgas.api.mixins.IGasReservoirType;
 import mekanism.api.gas.Gas;
 import net.minecraft.world.World;
 

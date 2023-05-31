@@ -3,7 +3,7 @@ package io.github.srdjanv.tweakedpetroleumgas.client.hei;
 import com.google.common.collect.Lists;
 import flaxbeard.immersivepetroleum.api.crafting.PumpjackHandler;
 import flaxbeard.immersivepetroleum.common.Config;
-import io.github.srdjanv.tweakedpetroleumgas.api.util.IGasReservoirType;
+import io.github.srdjanv.tweakedpetroleumgas.api.mixins.IGasReservoirType;
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasStack;
 import mekanism.client.jei.MekanismJEI;

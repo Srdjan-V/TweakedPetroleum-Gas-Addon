@@ -4,7 +4,7 @@ import blusunrize.immersiveengineering.api.MultiblockHandler;
 import blusunrize.immersiveengineering.api.crafting.IMultiblockRecipe;
 import blusunrize.immersiveengineering.common.blocks.metal.TileEntityMultiblockMetal;
 import flaxbeard.immersivepetroleum.common.blocks.metal.TileEntityPumpjack;
-import io.github.srdjanv.tweakedpetroleumgas.api.util.IGasPumpjackAddons;
+import io.github.srdjanv.tweakedpetroleumgas.api.mixins.IGasPumpjackAddons;
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasStack;
 import mekanism.api.gas.GasTank;
