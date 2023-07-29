@@ -9,7 +9,7 @@ plugins {
     id("eclipse")
     id("com.gtnewhorizons.retrofuturagradle") version "1.3.9"
     id("com.matthewprenger.cursegradle") version "1.4.0"
-    id('io.github.srdjan-v.local-git-dependency') version '0.4.1-dev' //tmp dev version before next lgd release
+    id('io.github.srdjan-v.local-git-dependency') version '0.5.2'
 }
 
 def currentBranch = ("git rev-parse --abbrev-ref HEAD").execute().inputStream.readLines().get(0)
@@ -88,8 +88,6 @@ configurations {
 }
 
 dependencies {
-    runtimeOnly localGroovy()
-
     implementation 'CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.679'
     implementation rfg.deobf('curse.maven:ImmersiveEngineering-231951:2974106')
     implementation rfg.deobf('curse.maven:ImmersivePetroleum-268250:3382321')
@@ -122,6 +120,7 @@ dependencies {
 
     //enables java 17 features on java 8
     annotationProcessor 'com.github.bsideup.jabel:jabel-javac-plugin:1.0.0'
+    annotationProcessor 'net.java.dev.jna:jna-platform:5.13.0'
     compileOnly 'com.github.bsideup.jabel:jabel-javac-plugin:1.0.0'
 
     if (project.use_assetmover.toBoolean()) {
@@ -142,43 +141,32 @@ dependencies {
 
 localGitDependency {
     add('https://github.com/Srdjan-V/TweakedPetroleum.git', {
-        oneTimeStartupTasks("setupCIWorkspace")
+        buildLauncher {
+            startup {
+                mainTasks "setupCIWorkspace"
+            }
+        }
         configuration("runtimeOnly")
+        subConfiguration {
+            name "TweakedLib"
+            configuration({
+                configuration "runtimeOnly"
+                include "tweakedlib"
+            })
+        }
         enableIdeSupport true
         mapSourceSets({
             recursive true
             map "main", "main"
         })
-        if (project.gradle.startParameter.taskNames[0] == 'build') {
-            if (currentBranch == "master") {
-                keepGitUpdated true
-                tag 'v' + project.tweaked_petroleum_version
-            } else {
-                throw new RuntimeException()
-            }
+        if (currentBranch == "master") {
+            keepGitUpdated true
+            tag 'v' + project.tweaked_petroleum_version
         } else {
-            if (currentBranch == "master") {
-                throw new RuntimeException()
-            }
             keepGitUpdated false
             branch 'develop'
         }
     })
-}
-
-afterEvaluate {
-    dependencies {
-        //tmp until implemented in lgd
-        runtimeClasspath(provider(() -> files("./localGitDependency/libs/TweakedPetroleum/localGitDependency/libs/TweakedLib/build/libs/tweakedlib-1.0.1.jar")))
-    }
-}
-
-if (currentBranch != "master") {
-    tasks.getByName("runClient").configure {
-        getJavaLauncher().set(javaToolchains.launcherFor({}))
-        //local hotswap jvm
-        setExecutable("C:\\Program Files\\Java\\jdk1.8.0_181\\bin\\java.exe")
-    }
 }
 
 def mixinConfigRefMap = 'mixins.' + project.archives_base_name + '.refmap.json'
