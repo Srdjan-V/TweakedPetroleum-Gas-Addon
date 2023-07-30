@@ -97,8 +97,8 @@ dependencies {
     implementation('curse.maven:Mekanism-268560:2835175')
 
     //HEI/JEI
-    compileOnly rfg.deobf('mezz.jei:jei_1.12.2:4.16.1.302:api')
-    runtimeOnly rfg.deobf('mezz.jei:jei_1.12.2:4.16.1.302')
+    //compileOnly rfg.deobf('mezz.jei:jei_1.12.2:4.16.1.302:api')
+    //runtimeOnly rfg.deobf('mezz.jei:jei_1.12.2:4.16.1.302')
     //implementation fg.deobf('curse.maven:had-enough-items-557549:3862733')
 
 
@@ -147,13 +147,19 @@ localGitDependency {
             }
         }
         configuration("runtimeOnly")
-        subConfiguration {
+        subConfiguration({
             name "TweakedLib"
             configuration({
                 configuration "runtimeOnly"
                 include "tweakedlib"
             })
-        }
+        }, {
+            name "HadEnoughItems"
+            configuration({
+                configuration "implementation"
+                include "HadEnoughItems_1.12.2"
+            })
+        })
         enableIdeSupport true
         mapSourceSets({
             recursive true

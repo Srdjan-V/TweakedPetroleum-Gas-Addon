@@ -3,6 +3,7 @@ package io.github.srdjanv.tweakedpetroleumgas.client.hei;
 import com.google.common.collect.Lists;
 import flaxbeard.immersivepetroleum.api.crafting.PumpjackHandler;
 import flaxbeard.immersivepetroleum.common.Config;
+import io.github.srdjanv.tweakedpetroleum.common.Configs;
 import io.github.srdjanv.tweakedpetroleumgas.api.mixins.IGasReservoirType;
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasStack;
@@ -15,6 +16,8 @@ import io.github.srdjanv.tweakedlib.api.hei.BaseHEIUtil;
 import io.github.srdjanv.tweakedpetroleum.util.HEIPumpjackUtil;
 
 import java.util.List;
+
+import static flaxbeard.immersivepetroleum.api.crafting.PumpjackHandler.reservoirList;
 
 @SuppressWarnings("NullableProblems")
 public class GasPumpjackWrapper implements IRecipeWrapper, ITooltipCallback<GasStack> {
@@ -77,6 +80,9 @@ public class GasPumpjackWrapper implements IRecipeWrapper, ITooltipCallback<GasS
 
     @Override
     public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
+        if (Configs.TPConfig.HEIConfig.drawPowerTier) HEIPumpjackUtil.drawPowerTier(minecraft,57, 50, reservoir.getPowerTier());
+        if (Configs.TPConfig.HEIConfig.drawSpawnWeight) HEIPumpjackUtil.drawSpawnWeight(minecraft,57, 70, reservoirList.get((PumpjackHandler.ReservoirType) reservoir));
+
         int warningCount = 1;
 
         if (Config.IPConfig.Extraction.req_pipes) {
@@ -87,8 +93,15 @@ public class GasPumpjackWrapper implements IRecipeWrapper, ITooltipCallback<GasS
             warningCount++;
         }
 
-        BaseHEIUtil.getPumpjackWarning().draw(minecraft, 55, 8);
-        minecraft.fontRenderer.drawString(String.valueOf(warningCount), 55, 6, 16696077);
+        HEIPumpjackUtil.getPumpjackWarning().draw(minecraft, 56, 24);
+        minecraft.fontRenderer.drawString(String.valueOf(warningCount), 56, 22, 16696077);
+
+        if (getStringWidth() >= 77) {
+            minecraft.fontRenderer.drawString(minecraft.fontRenderer.trimStringToWidth(
+                    HEIPumpjackUtil.formatString(reservoir.getName()), 68).concat("..."), 6, 6, 15658734);
+            return;
+        }
+        minecraft.fontRenderer.drawString(HEIPumpjackUtil.formatString(reservoir.getName()), 6, 6, 15658734);
     }
 
     @Override

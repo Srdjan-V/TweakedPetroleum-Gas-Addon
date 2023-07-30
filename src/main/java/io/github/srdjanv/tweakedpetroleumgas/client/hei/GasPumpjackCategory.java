@@ -40,12 +40,12 @@ public class GasPumpjackCategory implements IRecipeCategory<GasPumpjackWrapper> 
         IGuiIngredientGroup<GasStack> gasStacks = recipeLayout.getIngredientsGroup(MekanismJEI.TYPE_GAS);
         gasStacks.addTooltipCallback(recipeWrapper);
 
-        GasStackRenderer renderer1 = new GasStackRenderer(recipeWrapper.getMaxFluid(), false, 16, 60, null);
-        gasStacks.init(0, false, renderer1, 12, 10, 16, 60, 0, 0);
+        GasStackRenderer renderer1 = new GasStackRenderer(recipeWrapper.getMaxFluid(), false, 16, 47, null);
+        gasStacks.init(0, false, renderer1, 12, 23, 16, 47, 0, 0);
         gasStacks.set(0, recipeWrapper.getAverageGas());
 
-        GasStackRenderer renderer2 = new GasStackRenderer(recipeWrapper.getPumpSpeed(), false, 16, 60, null);
-        gasStacks.init(1, false, renderer2, 36, 10, 16, 60, 0, 0);
+        GasStackRenderer renderer2 = new GasStackRenderer(recipeWrapper.getPumpSpeed(), false, 16, 47, null);
+        gasStacks.init(1, false, renderer2, 36, 23, 16, 47, 0, 0);
         gasStacks.set(1, recipeWrapper.getReplenishRateGas());
 
     }
