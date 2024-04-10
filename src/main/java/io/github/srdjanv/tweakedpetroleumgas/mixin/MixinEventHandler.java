@@ -11,6 +11,7 @@ import blusunrize.immersiveengineering.common.util.Utils;
 import flaxbeard.immersivepetroleum.api.crafting.PumpjackHandler;
 import flaxbeard.immersivepetroleum.common.EventHandler;
 import flaxbeard.immersivepetroleum.common.entity.EntitySpeedboat;
+import io.github.srdjanv.tweakedpetroleum.api.mixins.ITweakedPetReservoirType;
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasRegistry;
 import net.minecraft.client.gui.FontRenderer;
@@ -29,7 +30,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import io.github.srdjanv.tweakedpetroleum.api.crafting.TweakedPumpjackHandler;
-import io.github.srdjanv.tweakedpetroleum.api.mixins.IReservoirType;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -53,13 +53,13 @@ public abstract class MixinEventHandler {
                 resName = "";
             }
 
-            Optional<IReservoirType> res = PumpjackHandler.reservoirList.keySet().stream().
-                    map(reservoirType -> (IReservoirType) reservoirType).
+            Optional<ITweakedPetReservoirType> res = PumpjackHandler.reservoirList.keySet().stream().
+                    map(reservoirType -> (ITweakedPetReservoirType) reservoirType).
                     filter(reservoirType -> reservoirType.getName().equals(resName)).
                     findFirst();
             List<String> tooltip = event.getToolTip();
             if (res.isPresent()) {
-                IReservoirType reservoirType = res.get();
+                ITweakedPetReservoirType reservoirType = res.get();
 
                 int amnt = ItemNBTHelper.getInt(stack, "oil");
                 String fluidName;
@@ -115,14 +115,14 @@ public abstract class MixinEventHandler {
                         final String resName = ItemNBTHelper.hasKey(coresample, "resType") ? ItemNBTHelper.getString(coresample, "resType") : "";
                         amnt = ItemNBTHelper.getInt(coresample, "oil");
 
-                            Optional<IReservoirType> res = PumpjackHandler.reservoirList.keySet().stream().
-                                    map(reservoirType -> (IReservoirType) reservoirType).
+                            Optional<ITweakedPetReservoirType> res = PumpjackHandler.reservoirList.keySet().stream().
+                                    map(reservoirType -> (ITweakedPetReservoirType) reservoirType).
                                     filter(reservoirType -> reservoirType.getName().equals(resName)).
                                     findFirst();
 
                             String tooltip = null;
                             if (res.isPresent()) {
-                                IReservoirType reservoirType = res.get();
+                                ITweakedPetReservoirType reservoirType = res.get();
                                 String fluidName;
                                 if (reservoirType.getReservoirContent() == TweakedPumpjackHandler.ReservoirContent.LIQUID) {
                                     if (amnt > 0) {

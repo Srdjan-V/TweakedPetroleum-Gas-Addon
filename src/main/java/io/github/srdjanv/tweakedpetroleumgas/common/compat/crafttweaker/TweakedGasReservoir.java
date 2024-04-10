@@ -5,7 +5,7 @@ import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import io.github.srdjanv.tweakedlib.api.powertier.PowerTierHandler;
 import io.github.srdjanv.tweakedpetroleum.api.crafting.TweakedPumpjackHandler;
-import io.github.srdjanv.tweakedpetroleum.api.mixins.IReservoirType;
+import io.github.srdjanv.tweakedpetroleum.api.mixins.ITweakedPetReservoirType;
 import io.github.srdjanv.tweakedpetroleum.util.ReservoirValidation;
 import mekanism.common.integration.crafttweaker.gas.IGasStack;
 import stanhebben.zenscript.annotations.Optional;
@@ -22,8 +22,8 @@ public class TweakedGasReservoir {
                                             @Optional int[] dimBlacklist, @Optional int[] dimWhitelist, @Optional String[] biomeBlacklist, @Optional String[] biomeWhitelist) {
 
 
-        IReservoirType res;
-        if (ReservoirValidation.validateReservoir(name, TweakedPumpjackHandler.ReservoirContent.GAS, gas,
+        ITweakedPetReservoirType res;
+        if (ReservoirValidation.validateReservoir(CraftTweakerAPI::logError, name, gas,
                 minSize, maxSize, replenishRate, pumpSpeed, weight, powerTier,
                 biomeBlacklist, biomeWhitelist)) {
             res = TweakedPumpjackHandler.addTweakedReservoir(name, gas.getName(), minSize, maxSize, replenishRate, pumpSpeed, weight, powerTier);
@@ -48,8 +48,8 @@ public class TweakedGasReservoir {
     public static void registerGasReservoirWithDrainChance(String name, IGasStack gas, int minSize, int maxSize, int replenishRate, int pumpSpeed, float drainChance, int weight, int powerTier,
                                                            @Optional int[] dimBlacklist, @Optional int[] dimWhitelist, @Optional String[] biomeBlacklist, @Optional String[] biomeWhitelist) {
 
-        IReservoirType res;
-        if (ReservoirValidation.validateReservoir(name, TweakedPumpjackHandler.ReservoirContent.GAS, gas,
+        ITweakedPetReservoirType res;
+        if (ReservoirValidation.validateReservoir(CraftTweakerAPI::logError, name, gas,
                 minSize, maxSize, replenishRate, pumpSpeed, weight, powerTier, drainChance,
                 biomeBlacklist, biomeWhitelist)) {
             res = TweakedPumpjackHandler.addTweakedReservoir(name, gas.getName(), minSize, maxSize, replenishRate, pumpSpeed, weight, powerTier);

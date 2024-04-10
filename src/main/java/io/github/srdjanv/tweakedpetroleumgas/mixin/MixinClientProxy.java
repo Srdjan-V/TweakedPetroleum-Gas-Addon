@@ -3,11 +3,11 @@ package io.github.srdjanv.tweakedpetroleumgas.mixin;
 
 import flaxbeard.immersivepetroleum.api.crafting.PumpjackHandler;
 import flaxbeard.immersivepetroleum.client.ClientProxy;
+import io.github.srdjanv.tweakedpetroleum.api.mixins.ITweakedPetReservoirType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import io.github.srdjanv.tweakedpetroleum.api.crafting.TweakedPumpjackHandler;
-import io.github.srdjanv.tweakedpetroleum.api.mixins.IReservoirType;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -23,7 +23,7 @@ public abstract class MixinClientProxy {
         int i = 0;
         while (keySet.hasNext()) {
             PumpjackHandler.ReservoirType reservoirType = keySet.next();
-            if (((IReservoirType) reservoirType).getReservoirContent() == TweakedPumpjackHandler.ReservoirContent.LIQUID) {
+            if (((ITweakedPetReservoirType) reservoirType).getReservoirContent() == TweakedPumpjackHandler.ReservoirContent.LIQUID) {
                 reservoirList.put(reservoirType, i);
                 i++;
             }

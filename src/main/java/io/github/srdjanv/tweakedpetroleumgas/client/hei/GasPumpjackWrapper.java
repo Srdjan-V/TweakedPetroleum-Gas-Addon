@@ -16,6 +16,7 @@ import io.github.srdjanv.tweakedlib.api.hei.BaseHEIUtil;
 import io.github.srdjanv.tweakedpetroleum.util.HEIPumpjackUtil;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import static flaxbeard.immersivepetroleum.api.crafting.PumpjackHandler.reservoirList;
 
@@ -60,21 +61,20 @@ public class GasPumpjackWrapper implements IRecipeWrapper, ITooltipCallback<GasS
 
     @Override
     public List<String> getTooltipStrings(int mouseX, int mouseY) {
-        String[][] strings = new String[3][];
+        Consumer<List<String>> warnings = list -> {
+            if (reservoir.getDrainChance() != 1f) {
+                list.add(HEIPumpjackUtil.translateToLocal("tweakedpetroleum.jei.reservoir.draw_chance1") + " " + reservoir.getDrainChance() * 100 +
+                        HEIPumpjackUtil.translateToLocal("tweakedpetroleum.jei.reservoir.draw_chance2") + " " + (100f - (reservoir.getDrainChance() * 100)) +
+                        HEIPumpjackUtil.translateToLocal("tweakedpetroleum.jei.reservoir.draw_chance3"));
+            }
 
-        if (reservoir.getDrainChance() != 1f) {
-            strings[0] = new String[]{"tweakedpetroleum.jei.reservoir.draw_chance",
-                    String.valueOf(reservoir.getDrainChance() * 100),
-                    String.valueOf(100f - (reservoir.getDrainChance() * 100))};
-        }
+            if (Config.IPConfig.Extraction.req_pipes)
+                list.add(HEIPumpjackUtil.translateToLocal("tweakedpetroleum.jei.reservoir.req_pipes"));
 
-        if (Config.IPConfig.Extraction.req_pipes) {
-            strings[2] = new String[]{"tweakedpetroleum.jei.reservoir.req_pipes"};
-        }
+            list.add(HEIPumpjackUtil.translateToLocal("tweakedpetroleumgas.jei.reservoir.gas_info"));
+        };
 
-        strings[1] = new String[]{"tweakedpetroleumgas.jei.reservoir.gas_info"};
-
-        return HEIPumpjackUtil.tooltipStrings(mouseX, mouseY, strings, reservoir,
+        return HEIPumpjackUtil.tooltipStrings(mouseX, mouseY, warnings, reservoir,
                 this::getAverage, this::getStringWidth);
     }
 
