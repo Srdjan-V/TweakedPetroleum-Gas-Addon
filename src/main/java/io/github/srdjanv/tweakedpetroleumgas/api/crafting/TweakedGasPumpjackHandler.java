@@ -1,13 +1,14 @@
 package io.github.srdjanv.tweakedpetroleumgas.api.crafting;
 
 import flaxbeard.immersivepetroleum.api.crafting.PumpjackHandler;
-import io.github.srdjanv.tweakedpetroleumgas.api.mixins.IGasReservoirType;
+import io.github.srdjanv.tweakedpetroleum.api.crafting.TweakedPumpjackHandler;
+import io.github.srdjanv.tweakedpetroleumgas.api.mixins.ITweakedGasReservoirType;
 import mekanism.api.gas.Gas;
 import net.minecraft.world.World;
 
 import static flaxbeard.immersivepetroleum.api.crafting.PumpjackHandler.getOilWorldInfo;
 
-public class TweakedGasPumpjackHandler {
+public class TweakedGasPumpjackHandler extends TweakedPumpjackHandler {
 
     /**
      * Gets the gas of a given chunk
@@ -25,7 +26,7 @@ public class TweakedGasPumpjackHandler {
         PumpjackHandler.OilWorldInfo info = getOilWorldInfo(world, chunkX, chunkZ);
 
         if (info != null && info.getType() != null) {
-            return ((IGasReservoirType) info.getType()).getGas();
+            return ((ITweakedGasReservoirType) info.getType()).getGas();
         }
 
         return null;

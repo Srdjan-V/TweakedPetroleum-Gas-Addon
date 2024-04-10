@@ -4,7 +4,7 @@ import blusunrize.immersiveengineering.api.MultiblockHandler;
 import blusunrize.immersiveengineering.api.crafting.IMultiblockRecipe;
 import blusunrize.immersiveengineering.common.blocks.metal.TileEntityMultiblockMetal;
 import flaxbeard.immersivepetroleum.common.blocks.metal.TileEntityPumpjack;
-import io.github.srdjanv.tweakedpetroleumgas.api.mixins.IGasPumpjackAddons;
+import io.github.srdjanv.tweakedpetroleumgas.api.mixins.ITweakedGasPumpjackAddons;
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasStack;
 import mekanism.api.gas.GasTank;
@@ -22,7 +22,7 @@ import javax.annotation.Nullable;
 
 @SuppressWarnings("NullableProblems")
 @Mixin(value = TileEntityPumpjack.class, remap = false, priority = 950)
-public abstract class MixinTileEntityPumpjack extends TileEntityMultiblockMetal<TileEntityPumpjack, IMultiblockRecipe> implements IGasPumpjackAddons {
+public abstract class MixinTileEntityPumpjack extends TileEntityMultiblockMetal<TileEntityPumpjack, IMultiblockRecipe> implements ITweakedGasPumpjackAddons {
 
     @Shadow
     public abstract void extractOil(int drained);

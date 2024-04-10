@@ -5,7 +5,7 @@ import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasTank;
 import net.minecraft.util.EnumFacing;
 
-public interface IGasPumpjackAddons extends ITweakedPetPumpjackAddons {
+public interface ITweakedGasPumpjackAddons extends ITweakedPetPumpjackAddons {
 
     Gas getGas();
 
