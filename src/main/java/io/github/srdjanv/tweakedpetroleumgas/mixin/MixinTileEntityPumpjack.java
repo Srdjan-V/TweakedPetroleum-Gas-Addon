@@ -5,10 +5,7 @@ import blusunrize.immersiveengineering.api.crafting.IMultiblockRecipe;
 import blusunrize.immersiveengineering.common.blocks.metal.TileEntityMultiblockMetal;
 import flaxbeard.immersivepetroleum.common.blocks.metal.TileEntityPumpjack;
 import io.github.srdjanv.tweakedpetroleumgas.api.mixins.ITweakedGasPumpjackAddons;
-import mekanism.api.gas.Gas;
-import mekanism.api.gas.GasStack;
-import mekanism.api.gas.GasTank;
-import mekanism.api.gas.IGasHandler;
+import mekanism.api.gas.*;
 import mekanism.common.capabilities.Capabilities;
 import mekanism.common.util.GasUtils;
 import net.minecraft.util.EnumFacing;
@@ -16,13 +13,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import org.spongepowered.asm.mixin.*;
 import io.github.srdjanv.tweakedpetroleumgas.api.crafting.TweakedGasPumpjackHandler;
-import io.github.srdjanv.tweakedpetroleumgas.common.gaspumpjack.DummyMultiblockGasWrapper;
 
 import javax.annotation.Nullable;
 
 @SuppressWarnings("NullableProblems")
 @Mixin(value = TileEntityPumpjack.class, remap = false, priority = 950)
-public abstract class MixinTileEntityPumpjack extends TileEntityMultiblockMetal<TileEntityPumpjack, IMultiblockRecipe> implements ITweakedGasPumpjackAddons {
+public abstract class MixinTileEntityPumpjack extends TileEntityMultiblockMetal<TileEntityPumpjack, IMultiblockRecipe> implements ITweakedGasPumpjackAddons, IGasHandler {
 
     @Shadow
     public abstract void extractOil(int drained);
@@ -30,9 +26,6 @@ public abstract class MixinTileEntityPumpjack extends TileEntityMultiblockMetal<
     public MixinTileEntityPumpjack(MultiblockHandler.IMultiblock mutliblockInstance, int[] structureDimensions, int energyCapacity, boolean redstoneControl) {
         super(mutliblockInstance, structureDimensions, energyCapacity, redstoneControl);
     }
-
-    @Unique
-    GasTank fakeGasTank = new GasTank(0);
 
     @Unique
     @Override
@@ -77,29 +70,26 @@ public abstract class MixinTileEntityPumpjack extends TileEntityMultiblockMetal<
 
     @Unique
     @Override
-    public GasTank[] getAccessibleGasTanks(EnumFacing side) {
+    public GasTankInfo[] getAccessibleGasTanks(EnumFacing side) {
         TileEntityPumpjack master = this.master();
-
         if (master != null) {
             if (this.pos == 9 && (side == null || side == this.facing.rotateY() || side == this.facing.getOpposite().rotateY())) {
-                return new GasTank[]{fakeGasTank};
+                return new GasTank[]{new GasTank(0)};
             }
 
             if (this.pos == 11 && (side == null || side == this.facing.rotateY() || side == this.facing.getOpposite().rotateY())) {
-                return new GasTank[]{fakeGasTank};
+                return new GasTank[]{new GasTank(0)};
             }
-
         }
 
-        return new GasTank[0];
+        return NONE;
     }
 
     @Unique
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-        if (capability == Capabilities.GAS_HANDLER_CAPABILITY && this.getAccessibleGasTanks(facing).length > 0) {
+        if (capability == Capabilities.GAS_HANDLER_CAPABILITY && this.getAccessibleGasTanks(facing).length > 0)
             return true;
-        }
 
         return super.hasCapability(capability, facing);
     }
@@ -108,11 +98,29 @@ public abstract class MixinTileEntityPumpjack extends TileEntityMultiblockMetal<
     @Override
     @SuppressWarnings("unchecked")
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        if (capability == Capabilities.GAS_HANDLER_CAPABILITY && this.getAccessibleGasTanks(facing).length > 0) {
-            return (T) DummyMultiblockGasWrapper.INSTANCE;
-        }
+        if (capability == Capabilities.GAS_HANDLER_CAPABILITY && this.getAccessibleGasTanks(facing).length > 0)
+            return (T) this;
 
         return super.getCapability(capability, facing);
     }
 
+    @Override
+    public int receiveGas(EnumFacing side, GasStack resource, boolean doTransfer) {
+        return 0;
+    }
+
+    @Override
+    public GasStack drawGas(EnumFacing side, int amount, boolean doTransfer) {
+        return null;
+    }
+
+    @Override
+    public boolean canReceiveGas(EnumFacing side, Gas type) {
+        return false;
+    }
+
+    @Override
+    public boolean canDrawGas(EnumFacing side, Gas type) {
+        return false;
+    }
 }
