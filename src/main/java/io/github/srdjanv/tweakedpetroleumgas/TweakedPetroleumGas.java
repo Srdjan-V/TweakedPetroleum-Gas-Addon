@@ -1,7 +1,14 @@
 package io.github.srdjanv.tweakedpetroleumgas;
 
 
+import blusunrize.immersiveengineering.ImmersiveEngineering;
+import blusunrize.immersiveengineering.common.IEContent;
+import flaxbeard.immersivepetroleum.ImmersivePetroleum;
 import io.github.srdjanv.tweakedlib.api.integration.DiscoveryHandler;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.client.renderer.color.ItemColors;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
