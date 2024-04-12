@@ -92,6 +92,12 @@ dependencies {
     implementation rfg.deobf('curse.maven:ImmersiveEngineering-231951:2974106')
     implementation rfg.deobf('curse.maven:ImmersivePetroleum-268250:3382321')
 
+    implementation ("com.cleanroommc:groovyscript:${project.groovy_script_version}") {
+        exclude group: 'mezz.jei', module: 'jei_1.12.2'
+        exclude group: 'curse.maven', module: 'top-245211'
+        exclude group: 'zone.rong', module: 'mixinbooter'
+    }
+
     //Mekanism
     implementation('curse.maven:Mekanism_api-268560:2835176')
     implementation('curse.maven:Mekanism-268560:2835175')
