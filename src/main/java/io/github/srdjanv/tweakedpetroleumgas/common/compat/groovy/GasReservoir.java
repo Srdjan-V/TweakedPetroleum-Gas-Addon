@@ -13,13 +13,13 @@ import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public class GasReservoir extends VirtualizedReservoirRegistry<
-        ITweakedPetReservoirType,
+        ITweakedGasReservoirType,
         GasReservoir.GasReservoirBuilder,
         GasReservoir.GasReservoirWrapper> {
 
 
     public GasReservoir() {
-        super(Arrays.asList("GasReservoir", "gasReservoir", "gasreservoir"));
+        super("Gas");
     }
 
     @Override protected BiFunction<PumpjackHandler.ReservoirType, Integer, GasReservoirWrapper> getReservoirTypeWrapperFunction() {
