@@ -53,6 +53,7 @@ public class GasReservoir extends VirtualizedReservoirRegistry<
             ITweakedGasReservoirType res = (ITweakedGasReservoirType)
                     new PumpjackHandler.ReservoirType(name, gas.getGas().getName(), minSize, maxSize, replenishRate);
 
+            res.setDrainChance(drainChance);
             res.setPumpSpeed(pumpSpeed);
             res.setPowerTier(powerTier);
             res.setReservoirContent(TweakedPumpjackHandler.ReservoirContent.GAS);
@@ -65,7 +66,6 @@ public class GasReservoir extends VirtualizedReservoirRegistry<
             add(wrapper);
             return wrapper;
         }
-
     }
 
     public class GasReservoirWrapper extends ReservoirWrapper<ITweakedGasReservoirType, GasReservoirBuilder> {
