@@ -3,13 +3,11 @@ package io.github.srdjanv.tweakedpetroleumgas.common.compat.groovy;
 import com.cleanroommc.groovyscript.api.GroovyLog;
 import flaxbeard.immersivepetroleum.api.crafting.PumpjackHandler;
 import io.github.srdjanv.tweakedpetroleum.api.crafting.TweakedPumpjackHandler;
-import io.github.srdjanv.tweakedpetroleum.api.mixins.ITweakedPetReservoirType;
 import io.github.srdjanv.tweakedpetroleum.common.compat.groovy.VirtualizedReservoirRegistry;
 import io.github.srdjanv.tweakedpetroleum.util.ReservoirValidation;
 import io.github.srdjanv.tweakedpetroleumgas.api.mixins.ITweakedGasReservoirType;
 import mekanism.api.gas.GasStack;
 
-import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public class GasReservoir extends VirtualizedReservoirRegistry<
@@ -41,7 +39,7 @@ public class GasReservoir extends VirtualizedReservoirRegistry<
         @Override
         public boolean validate() {
             GroovyLog.Msg msg = GroovyLog.msg("Error adding custom gas reservoir").error();
-            ReservoirValidation.validateReservoir(msg::add, name, gas, minSize, maxSize, replenishRate, pumpSpeed, weight, powerTier, drainChance,
+            ReservoirValidation.validateReservoir(msg::add, name, gas, minSize, maxSize, replenishRate, pumpSpeed, weight, powerTier, drainChance.floatValue(),
                     biomeBlacklist == null ? null : biomeBlacklist.toArray(new String[]{}), biomeWhitelist == null ? null : biomeWhitelist.toArray(new String[]{}));
 
             return !msg.postIfNotEmpty();
@@ -53,7 +51,7 @@ public class GasReservoir extends VirtualizedReservoirRegistry<
             ITweakedGasReservoirType res = (ITweakedGasReservoirType)
                     new PumpjackHandler.ReservoirType(name, gas.getGas().getName(), minSize, maxSize, replenishRate);
 
-            res.setDrainChance(drainChance);
+            res.setDrainChance(drainChance.floatValue());
             res.setPumpSpeed(pumpSpeed);
             res.setPowerTier(powerTier);
             res.setReservoirContent(TweakedPumpjackHandler.ReservoirContent.GAS);
